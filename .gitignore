@@ -1,0 +1,5 @@
+node_modules/
+.tools/
+.sites-runtime/
+.env
+.env.*
