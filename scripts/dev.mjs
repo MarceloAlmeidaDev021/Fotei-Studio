@@ -1,19 +1,11 @@
 import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
 import { watch } from "node:fs";
-import { resolve, extname, sep } from "node:path";
+import { resolve } from "node:path";
 import { spawn } from "node:child_process";
+import { createStaticHandler } from "./static-handler.mjs";
 
 const root = resolve("dist");
 const port = Number(process.env.PORT || 5173);
-const types = {
-  ".html": "text/html; charset=utf-8",
-  ".js": "text/javascript; charset=utf-8",
-  ".css": "text/css; charset=utf-8",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".woff2": "font/woff2",
-};
 
 function build() {
   return new Promise((accept, reject) => {
@@ -59,31 +51,7 @@ const watchers = ["src", "public"].map((path) =>
 );
 watchers.push(watch("build.mjs", changed));
 
-const server = createServer(async (request, response) => {
-  try {
-    const pathname = decodeURIComponent(
-      new URL(request.url, "http://localhost").pathname,
-    );
-    const file = resolve(
-      root,
-      `.${pathname === "/" ? "/index.html" : pathname}`,
-    );
-    if (!file.startsWith(root + sep)) {
-      response.writeHead(403);
-      response.end("Acesso negado.");
-      return;
-    }
-    const contents = await readFile(file);
-    response.writeHead(200, {
-      "Content-Type": types[extname(file)] || "application/octet-stream",
-      "Cache-Control": "no-store",
-    });
-    response.end(contents);
-  } catch {
-    response.writeHead(404);
-    response.end("Arquivo não encontrado.");
-  }
-});
+const server = createServer(createStaticHandler(root));
 server.on("error", (error) => {
   console.error(error.message);
   process.exit(1);

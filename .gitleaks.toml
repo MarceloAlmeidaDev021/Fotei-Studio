@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Local tooling, installed dependencies and temporary build cache are not published"
+paths = [
+  '''(^|[\\/])node_modules[\\/]''',
+  '''(^|[\\/])\.tools[\\/]''',
+  '''(^|[\\/])\.sites-runtime[\\/]''',
+]

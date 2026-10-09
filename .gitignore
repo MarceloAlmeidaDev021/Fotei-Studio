@@ -3,3 +3,9 @@ node_modules/
 .sites-runtime/
 .env
 .env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.vercel/
+*.log

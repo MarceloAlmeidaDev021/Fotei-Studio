@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "lint:security": "eslint . --max-warnings 0",
+    "audit:security": "npm audit --audit-level=low",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build": "node build.mjs",
@@ -18,7 +20,10 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "esbuild": "^0.25.0",
+    "eslint": "^10.12.0",
+    "eslint-plugin-security": "^4.2.0",
     "prettier": "^3.9.9"
   }
 }
