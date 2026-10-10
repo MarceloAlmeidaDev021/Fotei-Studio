@@ -61,19 +61,6 @@ A compilação também mantém os arquivos de `dist/` formatados, incluindo o HT
 
 A compilação gera a pasta `dist/`. Os testes verificam datas inexistentes, anos bissextos, formato brasileiro e preservação da data na mensagem.
 
-## Publicar na Vercel
-
-Envie este projeto para um repositório seu e importe-o na Vercel. Configure:
-
-- Framework preset: **Other**.
-- Build command: **npm run build**.
-- Output directory: **dist**.
-- Install command: **npm ci**.
-
-Referência: [Configuração de build da Vercel](https://vercel.com/docs/builds/configure-a-build).
-
-O projeto é estático e não precisa de variáveis de ambiente. A hospedagem atual do Fotei continua independente desta cópia; alterações locais não são publicadas automaticamente nela.
-
 ## Conteúdo deste pacote
 
 Inclui código-fonte, imagens, fontes locais, testes, arquivos de configuração e a versão compilada. As dependências serão instaladas com `npm ci`; `node_modules`, credenciais e o histórico Git não são incluídos.
